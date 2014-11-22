@@ -29,14 +29,15 @@ public class HelloController   {
         String ctr = " ";
 
       try {
-        EtcdResult res = client.get("wen");
-        if (!res.isError())
-            ctr = getCounter();
-        else
-            ctr = init();
+        EtcdResult res = client.get("to");
+    //   if (!res.isError())
+        ctr = getCounter();
+    //    else
+      //      ctr = init(); 
       } 
       catch(EtcdClientException e) {
-         e.printStackTrace();
+       //  e.printStackTrace();
+         ctr = init();
         } 
         return ctr;
     }
@@ -45,8 +46,8 @@ public class HelloController   {
     {
         String finalRes = " ";
         try {
-        EtcdResult result = client.set("wen", "0");
-        result = client.get("wen");
+        EtcdResult result = client.set("to", "0");
+        result = client.get("to");
         finalRes = result.value;
         }
         catch(EtcdClientException e) {
@@ -61,7 +62,7 @@ public class HelloController   {
 
     try {
 
-    EtcdResult resultGet = client.get("wen");
+    EtcdResult resultGet = client.get("to");
 
     String val = resultGet.value;
     
@@ -72,9 +73,9 @@ public class HelloController   {
 
     String upd = Integer.toString(ctr);
 
-    client.set("wen",upd);
+    client.set("to",upd);
 
-    resultGet = client.get("wen");
+    resultGet = client.get("to");
 
     System.out.println("new val = "+resultGet.value);
 
