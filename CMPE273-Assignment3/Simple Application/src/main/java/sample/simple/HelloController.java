@@ -25,9 +25,9 @@ public class HelloController   {
     EtcdClient client = new EtcdClient(URI.create("http://127.0.0.1:4001/"));
 
     @RequestMapping(value = "/check", method = RequestMethod.GET)
-    Public String check()
+    public String check()
     {
-        return "Alive!"
+        return "Alive!";
     }
 
     @RequestMapping(value = "/counter", method = RequestMethod.GET)
