@@ -29,7 +29,7 @@ public class HelloController   {
         String ctr = " ";
 
       try {
-        EtcdResult res = client.get("to");
+        EtcdResult res = client.get("counter");
     //   if (!res.isError())
         ctr = getCounter();
     //    else
@@ -46,8 +46,8 @@ public class HelloController   {
     {
         String finalRes = " ";
         try {
-        EtcdResult result = client.set("to", "0");
-        result = client.get("to");
+        EtcdResult result = client.set("counter", "0");
+        result = client.get("counter");
         finalRes = result.value;
         }
         catch(EtcdClientException e) {
@@ -62,7 +62,7 @@ public class HelloController   {
 
     try {
 
-    EtcdResult resultGet = client.get("to");
+    EtcdResult resultGet = client.get("counter");
 
     String val = resultGet.value;
     
@@ -73,9 +73,9 @@ public class HelloController   {
 
     String upd = Integer.toString(ctr);
 
-    client.set("to",upd);
+    client.set("counter",upd);
 
-    resultGet = client.get("to");
+    resultGet = client.get("counter");
 
     System.out.println("new val = "+resultGet.value);
 

@@ -22,14 +22,14 @@ import com.justinsb.etcd.EtcdResult;
 @RequestMapping(value = "/api/v1")
 public class HelloController   {
 
-    EtcdClient client = new EtcdClient(URI.create("http://127.0.0.1:4001/"));
+    EtcdClient client = new EtcdClient(URI.create("http://54.67.63.100:4001/"));
 
     @RequestMapping(value = "/counter", method = RequestMethod.GET)
     public String counter() {
         String ctr = " ";
 
       try {
-        EtcdResult res = client.get("to");
+        EtcdResult res = client.get("counter");
         ctr = getCounter();
       } 
       catch(EtcdClientException e) {
@@ -42,8 +42,8 @@ public class HelloController   {
     {
         String finalRes = " ";
         try {
-        EtcdResult result = client.set("to", "0");
-        result = client.get("to");
+        EtcdResult result = client.set("counter", "0");
+        result = client.get("counter");
         finalRes = result.value;
         }
         catch(EtcdClientException e) {
@@ -58,7 +58,7 @@ public class HelloController   {
 
     try {
 
-    EtcdResult resultGet = client.get("to");
+    EtcdResult resultGet = client.get("counter");
 
     String val = resultGet.value;
     
@@ -69,9 +69,9 @@ public class HelloController   {
 
     String upd = Integer.toString(ctr);
 
-    client.set("to",upd);
+    client.set("counter",upd);
 
-    resultGet = client.get("to");
+    resultGet = client.get("counter");
 
     System.out.println("new val = "+resultGet.value);
 
